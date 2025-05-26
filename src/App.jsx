@@ -1,12 +1,24 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Navbar from "./Navbar"
+import Body from "./body"
+import Login from "./Login"
+import Profile from "./profile"
+
 
 function App() {
 
   return (
-   
     <>
-        <Navbar/>   
-      <h1 className="text-4xl font-bold text-blue-600 underline">Hello Tailwind!</h1>
+      <BrowserRouter basename="/">
+        <Routes>
+          <Route path="/" element={<Body/>}>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/profile" element={<Profile/>}/>
+          </Route>
+         
+        </Routes>
+      </BrowserRouter>
+    
     </>
       
   
