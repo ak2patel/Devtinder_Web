@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Navbar from "./Navbar"
 import Body from "./body"
 import Login from "./Login"
 import Profile from "./profile"
