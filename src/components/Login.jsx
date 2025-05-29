@@ -10,6 +10,7 @@ const Login = () => {
   
   const [emailId,setEmailId]= useState("ankit@gmail.com");
   const [password,setPassword]= useState("Password@123");
+  const [error,setError] = useState("")
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -25,8 +26,7 @@ const Login = () => {
     navigate("/");
   }catch(err){
     console.error(err);
-    console.error("Login failed:", err.response?.data || err.message);
-    alert("Login failed. Please check your credentials.");
+    setError(err?.response?.data || "something went wrong");
   }
 
   } 
@@ -58,13 +58,10 @@ const Login = () => {
               placeholder="Enter Password" 
               />
             </fieldset>
-
-
           </div>
+          <p className="text-red-500">{error}</p>
           <div
-            className="card-actions justify-center
-     "
-          >
+            className="card-actions justify-center">
             <button className="btn btn-primary" onClick={handleLogin}>Login</button>
           </div>
         </div>
