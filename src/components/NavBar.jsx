@@ -19,13 +19,14 @@ const Navbar = () => {
       return navigate("/login")
 
     }catch(err){
-      //console.log("Error : "+err.message)
+      console.error(err)
       }
   }
   return (
     <div className="navbar bg-base-300 shadow-sm">
   <div className="flex-1">
-    <Link to="/" className="btn btn-ghost text-xl">Dev Tinder</Link>
+    {/* would add validations so that it will redirect to login page if logged out */}
+    <Link to="/" className="btn btn-ghost text-xl">Dev Tinder</Link> 
   </div>
   <div className="flex gap-2">
    

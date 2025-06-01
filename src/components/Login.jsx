@@ -20,8 +20,6 @@ const Login = () => {
       emailId,
       password
     },{withCredentials:true})
-    // console.log("login succesful")
-    // console.log(res.data);
     dispatch(addUser(res.data));
     navigate("/");
   }catch(err){
