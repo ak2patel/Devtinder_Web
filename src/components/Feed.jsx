@@ -58,7 +58,7 @@ const Feed = ()=>{
   useEffect(()=>{getFeed();},[])
 
     if (!feed || feed.length === 0 || !feed[0]) {
-    return <div className="text-center mt-10 text-gray-500">Loading feed...</div>;
+    return <div className="text-center mt-10 text-gray-500">Loading feed...    NO new User Found</div>;
   }
 
   return(feed &&  <div className="flex justify-center my-10">
