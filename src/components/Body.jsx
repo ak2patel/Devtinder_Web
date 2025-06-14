@@ -22,12 +22,13 @@ const Body = () => {
   
 }catch(err){
   if(err.response?.status==401){
-  navigate("/login")}
+    console.error(err);
+  }
+  navigate("/login")
   //  if (!userData || Object.keys(userData).length === 0) {
   //     fetchUser()
   //   }
   //navigate("/login")
-  console.error(err);
 }
 };
  

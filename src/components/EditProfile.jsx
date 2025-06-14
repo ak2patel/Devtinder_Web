@@ -85,32 +85,22 @@ const EditProfile = ({user}) => {
               placeholder="Enter Age" 
               />
 
-            {/* </fieldset><fieldset className="fieldset my-2">
-              <legend className="fieldset-legend">Gender</legend>
-              <input type="text"
-               id="gender"
-               name="gender"
-              value={gender}
-              className="input"
-              onChange={(e)=>setGender(e.target.value)}
-              placeholder="Enter Gender" 
-              /> */}
 
               <fieldset className="fieldset my-2">
-  <legend className="fieldset-legend">Gender</legend>
-  <select
-    id="gender"
-    name="gender"
-    value={gender}
-    className="input"
-    onChange={(e) => setGender(e.target.value)}
-  >
-    <option value="">Select Gender</option>
-    <option value="Male">Male</option>
-    <option value="Female">Female</option>
-    <option value="Others">Others</option>
-  </select>
-</fieldset>
+               <legend className="fieldset-legend">Gender</legend>
+               <select
+                id="gender"
+                name="gender"
+                value={gender}
+                className="input"
+                onChange={(e) => setGender(e.target.value)}
+                 >
+               <option value="">Select Gender</option>
+               <option value="Male">Male</option>
+               <option value="Female">Female</option>
+               <option value="Others">Others</option>
+              </select>
+             </fieldset>
 
 
             </fieldset><fieldset className="fieldset my-2">
