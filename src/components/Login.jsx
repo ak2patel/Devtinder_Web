@@ -8,11 +8,11 @@ import { BASE_URL } from "../utils/constants";
 
 const Login = () => {
   
-  const [emailId,setEmailId]= useState("@gmail.com");
-  const [password,setPassword]= useState("Password@123");
+  const [emailId,setEmailId]= useState("");
+  const [password,setPassword]= useState("");
   const [firstName,setFirstName]=useState("");
   const [lastName,setLastName]=useState("");
-  const [isLoginForm,setIsLoginForm]=useState(false);
+  const [isLoginForm,setIsLoginForm]=useState(true);
 
   const [error,setError] = useState("")
   const navigate = useNavigate();
@@ -104,7 +104,7 @@ const Login = () => {
             className="card-actions justify-center">
             <button className="btn btn-primary" onClick={isLoginForm? handleLogin:handleSignUp}>{isLoginForm?"Login":"Sign Up"}</button>
           </div>
-          <p className="m-auto cursor-pointer py-2" on onClick={()=>setIsLoginForm((value)=>!value)}>{isLoginForm?"New User? SignUp here":"Existing User ? Login here"}</p>
+          <p className="m-auto cursor-pointer py-2" onClick={()=>setIsLoginForm((value)=>!value)}>{isLoginForm?"New User? SignUp here":"Existing User ? Login here"}</p>
         </div>
       </div>
     </div>
