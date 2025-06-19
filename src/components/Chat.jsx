@@ -17,7 +17,7 @@ const Chat = ()=>{
 
         socket.on( "messageReceived",({firstName,text})=>{
             console.log(firstName + " : " + text);
-            setMessage([...message,{firstName,text}]);
+            setMessage((message)=>[...message,{firstName,text}]);
         })
         
 
@@ -57,14 +57,14 @@ const Chat = ()=>{
                          <div className="chat-footer opacity-50">Seen</div>
                       </div>
 
-                       <div className="chat chat-start">
+                       {/* <div className="chat chat-start">
                             <div className="chat-header">
                                 {msg.firstName}
                                 <time className="text-xs opacity-50">2 hour ago</time>
                             </div>
                             <div className="chat-bubble">I loved you.</div>
                             <div className="chat-footer opacity-50">Delivered</div>
-                       </div>
+                       </div> */}
                     </>
                 );
             })}
