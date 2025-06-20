@@ -2,6 +2,8 @@ import {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
 import { createSocketConnection } from '../utils/SOCKET.JS';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { BASE_URL } from '../utils/constants';
 
 const Chat = ()=>{
     const {targetUserId} = useParams();
@@ -10,14 +12,28 @@ const Chat = ()=>{
 
     const user = useSelector(store=>store.user)
     const userId = user?._id;
+
+    const fetchChatMessages = async ()=>{
+        const chat = await axios.get(BASE_URL+"/chat/"+targetUserId,{withCredentials:true,});
+        const chatMessages = chat?.data?.messages.map((msg)=>{
+            const {senderId, text}= msg;
+            return { firstName:senderId?.firstName , lastName:senderId?.lastName,text}
+        });
+        setMessage(chatMessages);
+    };
+
+    useEffect(()=>{
+        fetchChatMessages();
+    },[]);
+     
     useEffect(()=>{
         if(!userId)return;
         const socket = createSocketConnection();
         socket.emit("joinChat",{userId, targetUserId}); 
 
-        socket.on( "messageReceived",({firstName,text})=>{
+        socket.on( "messageReceived",({firstName,lastName,text})=>{
             console.log(firstName + " : " + text);
-            setMessage((message)=>[...message,{firstName,text}]);
+            setMessage((message)=>[...message,{firstName,lastName,text}]);
         })
         
 
@@ -25,12 +41,13 @@ const Chat = ()=>{
             socket.disconnect();
         };
      
-    },[userId,targetUserId])
+    },[userId,targetUserId]);
 
     const sendMessage = ()=>{
         const socket= createSocketConnection();
         socket.emit("sendMessage",{
             firstName: user.firstName,
+            lastName: user.lastName,
             userId,
             targetUserId,
             text : newMessage,
@@ -47,25 +64,18 @@ const Chat = ()=>{
         <div className="flex-1 overflow-scroll p-5">
             {message.map((msg,index)=>{
                 return(
-                    <> 
-                     <div key={index} className="chat chat-start">
+                    
+                     <div key={index} className={`chat ${user.firstName===msg.firstName ? "chat-end" : "chat-start"}`}>
                           <div className="chat-header">
-                            {msg.firstName}
-                            <time className="text-xs opacity-50">2 hours ago</time>
+                            {`${msg.firstName} ${msg.lastName}`}
+                        {/* <time className="text-xs opacity-50">2 hours ago</time> */}
                           </div>
                          <div className="chat-bubble">{msg.text}</div>
-                         <div className="chat-footer opacity-50">Seen</div>
+                         {/* <div className="chat-footer opacity-50">Seen</div> */}
                       </div>
 
-                       {/* <div className="chat chat-start">
-                            <div className="chat-header">
-                                {msg.firstName}
-                                <time className="text-xs opacity-50">2 hour ago</time>
-                            </div>
-                            <div className="chat-bubble">I loved you.</div>
-                            <div className="chat-footer opacity-50">Delivered</div>
-                       </div> */}
-                    </>
+                     
+                    
                 );
             })}
 
