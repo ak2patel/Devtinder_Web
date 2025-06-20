@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom';
-import { createSocketConnection } from '../utils/SOCKET.JS';
+import { createSocketConnection } from '../utils/socket';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { BASE_URL } from '../utils/constants';
